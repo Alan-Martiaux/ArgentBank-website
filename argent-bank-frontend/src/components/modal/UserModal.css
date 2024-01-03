@@ -1,0 +1,42 @@
+.ModalUserContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.modalUser {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    gap:15px
+}
+
+.modalUser h2 {
+    margin-bottom: 0;
+}
+
+.close-usermodal-button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+}
+
+.inputUserModal {
+    height: 30px;
+}
+
+.container-usermodal-button, .usermodal-input {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.usermodal-input input {
+    width: 60%;
+}
