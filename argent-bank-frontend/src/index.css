@@ -116,6 +116,16 @@ body {
   font-size: 0.9rem;
 }
 
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.errorPage p {
+  padding: 0 5px;
+}
+
 @media (min-width: 920px) {
   .hero {
     height: 400px;
