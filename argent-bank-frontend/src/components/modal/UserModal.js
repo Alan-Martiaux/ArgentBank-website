@@ -1,15 +1,25 @@
 import React from "react";
 import "./UserModal.css";
+
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfil } from "../../redux/apiCall";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { fetchUpdateUserName } from "../../redux/apiCall";
 
 const UserModal = ({ isOpen, closeModal, children }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
+  const firstName = useSelector((state) => state.user.user.firstName);
+  const lastName = useSelector((state) => state.user.user.lastName);
+  const username = useSelector((state) => state.user.user.userName);
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const SetUsername = document.querySelector(".inputNewUserName");
+    console.error(SetUsername.value);
+    fetchUpdateUserName(token, SetUsername.value, dispatch);
+    closeModal();
+  };
   fetchUserProfil(token, dispatch);
-  console.log(token);
 
   return (
     isOpen && (
@@ -19,9 +29,9 @@ const UserModal = ({ isOpen, closeModal, children }) => {
           <div className="usermodal-input">
             <p>Surname</p>
             <input
-              className="inputUserModal"
+              className="inputUserModal inputNewUserName"
               type="text"
-              placeholder="Ecrire ici"
+              placeholder={username}
               required
             />
           </div>
@@ -31,7 +41,7 @@ const UserModal = ({ isOpen, closeModal, children }) => {
             <input
               className="inputUserModal"
               type="text"
-              placeholder="First Name"
+              placeholder={firstName}
               disabled
             />
           </div>
@@ -41,12 +51,12 @@ const UserModal = ({ isOpen, closeModal, children }) => {
             <input
               className="inputUserModal"
               type="text"
-              placeholder="Last Name"
+              placeholder={lastName}
               disabled
             />
           </div>
           <div className="container-usermodal-button">
-            <button className="close-usermodal-button" onClick={closeModal}>
+            <button className="close-usermodal-button" onClick={handleSubmit}>
               Save
             </button>
             <button className="close-usermodal-button" onClick={closeModal}>

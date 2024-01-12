@@ -1,7 +1,7 @@
 import Banner from "../../components/banner/banner";
 import ArrayFeatures from "../../components/features/featuresItem.json";
 import Features from "../../components/features/feature";
-import "../../css/main.css"
+import "../../css/main.css";
 
 function HomePage() {
   return (
@@ -11,7 +11,8 @@ function HomePage() {
         {ArrayFeatures.map((features, index) => (
           <Features
             key={index}
-            img={features.img}
+            image={features.image}
+            alt={features.alt}
             title={features.title}
             content={features.content}
           />

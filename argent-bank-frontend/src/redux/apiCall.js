@@ -1,9 +1,11 @@
-import { setUser, setToken } from "./userSlice";
+import { setUser, setToken, setUsername, setError } from "./userSlice";
 import axios from "axios";
+
+const URL = "http://localhost:3001/api/v1/user/";
 
 export const fetchUserData = (email, password, navigate, dispatch) => {
   axios
-    .post("http://localhost:3001/api/v1/user/login", {
+    .post(URL + "login", {
       email: email,
       password: password,
     })
@@ -18,13 +20,14 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
         if (token) {
           console.log("WIN");
           navigate("/user");
-          //  console.log(token);
         }
       }
     })
 
     .catch(function (error) {
       console.log(error);
+
+      alert("Veuillez verifier vos identifiant de connexion !");
     });
 };
 
@@ -33,17 +36,42 @@ export const fetchUserProfil = (token, dispatch) => {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
-  console.log(headers, token);
   axios
-    .post("http://localhost:3001/api/v1/user/profile", {}, { headers })
+    .post(URL + "profile", {}, { headers })
     .then(function (response) {
-      console.log(response.data.body.userName);
       const data = response.data.body;
+      const dataUsername = response.data.body.userName;
       dispatch(setUser(data));
+      dispatch(setUsername(dataUsername));
     })
 
-    .catch(function (error, response) {
+    .catch(function (error) {
       console.error(error);
       console.log(error.response);
+    });
+};
+
+export const fetchUpdateUserName = (token, SetUsername, dispatch) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  console.log(headers, token);
+
+  axios
+    .put(URL + "profile", { userName: SetUsername }, { headers })
+    .then(function (response) {
+      console.log(response);
+      console.log(SetUsername);
+      // Dispatch seulement si le nom d'utilisateur est disponible
+      if (SetUsername) {
+        dispatch(setUsername(SetUsername));
+      } else {
+        console.error("Veuillez entrer un nom d'utilisateur valide !");
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
     });
 };

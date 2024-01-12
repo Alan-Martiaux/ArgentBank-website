@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function User() {
+  const firstName = useSelector((state) => state.user.user.firstName);
+  const lastName = useSelector((state) => state.user.user.lastName);
   const token = useSelector((state) => state.user.token);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -19,10 +21,10 @@ function User() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  console.log(token);
+  //console.log(userName);
 
   if (!token) {
-    return <Navigate to="/error" />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -32,7 +34,7 @@ function User() {
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {firstName} {lastName}
           </h1>
           <button onClick={openModal} className="edit-button">
             Edit Name

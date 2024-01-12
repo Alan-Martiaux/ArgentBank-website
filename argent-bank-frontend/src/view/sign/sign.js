@@ -1,9 +1,7 @@
-import UserProfile from "../../components/username/username";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserData } from "../../redux/apiCall";
 import { useNavigate } from "react-router-dom";
-//import axios from "axios";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -11,7 +9,7 @@ function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = async () => {
+  const handleSignIn = () => {
     try {
       console.log("try");
       fetchUserData(username, password, navigate, dispatch);
@@ -58,7 +56,6 @@ function SignIn() {
             Sign In
           </button>
         </form>
-        <UserProfile />
       </section>
     </main>
   );
