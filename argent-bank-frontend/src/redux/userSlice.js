@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     token: null,
-    error: "",
+
     user: {
       email: "",
       password: "",
@@ -22,10 +22,6 @@ const userSlice = createSlice({
     },
     setUsername: (state, action) => {
       state.user.userName = action.payload;
-    },
-
-    setError: (state) => {
-      state.error = "";
     },
     logout: (state) => {
       state.token = "";

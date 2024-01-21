@@ -146,8 +146,8 @@ paths:
       description: API for updating a user profile
       parameters:
         - in: header
-          name: token
-          description: Bearer Token
+          name: Account_ID
+          description: ID Account
           required: true
           type: string
         - in: path

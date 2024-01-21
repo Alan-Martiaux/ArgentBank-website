@@ -34,7 +34,7 @@ function User() {
           <h1>
             Welcome back
             <br />
-            {firstName} {lastName}
+            {firstName} {lastName} !
           </h1>
           <button onClick={openModal} className="edit-button">
             Edit Name

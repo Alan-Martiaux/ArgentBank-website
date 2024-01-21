@@ -1,4 +1,4 @@
-import { setUser, setToken, setUsername, setError } from "./userSlice";
+import { setUser, setToken, setUsername } from "./userSlice";
 import axios from "axios";
 
 const URL = "http://localhost:3001/api/v1/user/";
@@ -10,7 +10,7 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
       password: password,
     })
     .then(function (response) {
-      if (response) {
+      if (response && response.status === 200) {
         const responseData = response.data;
         console.log(response);
         const token = responseData.body.token;
@@ -39,10 +39,12 @@ export const fetchUserProfil = (token, dispatch) => {
   axios
     .post(URL + "profile", {}, { headers })
     .then(function (response) {
-      const data = response.data.body;
-      const dataUsername = response.data.body.userName;
-      dispatch(setUser(data));
-      dispatch(setUsername(dataUsername));
+      if (response && response.status === 200) {
+        const data = response.data.body;
+        const dataUsername = response.data.body.userName;
+        dispatch(setUser(data));
+        dispatch(setUsername(dataUsername));
+      }
     })
 
     .catch(function (error) {
@@ -63,10 +65,13 @@ export const fetchUpdateUserName = (token, SetUsername, dispatch) => {
     .put(URL + "profile", { userName: SetUsername }, { headers })
     .then(function (response) {
       console.log(response);
+
       console.log(SetUsername);
+
       // Dispatch seulement si le nom d'utilisateur est disponible
       if (SetUsername) {
         dispatch(setUsername(SetUsername));
+        console.log(SetUsername);
       } else {
         console.error("Veuillez entrer un nom d'utilisateur valide !");
       }
