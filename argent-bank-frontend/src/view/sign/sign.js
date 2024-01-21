@@ -56,6 +56,7 @@ function SignIn() {
             Sign In
           </button>
         </form>
+        <div id="errorLoginMessage"></div>
       </section>
     </main>
   );

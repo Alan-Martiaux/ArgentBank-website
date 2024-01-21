@@ -36,6 +36,7 @@ function User() {
             <br />
             {firstName} {lastName} !
           </h1>
+
           <button onClick={openModal} className="edit-button">
             Edit Name
           </button>

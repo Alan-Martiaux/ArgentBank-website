@@ -16,8 +16,7 @@ const UserModal = ({ isOpen, closeModal, children }) => {
     evt.preventDefault();
     const SetUsername = document.querySelector(".inputNewUserName");
     console.error(SetUsername.value);
-    fetchUpdateUserName(token, SetUsername.value, dispatch);
-    closeModal();
+    fetchUpdateUserName(token, SetUsername.value, dispatch, closeModal);
   };
   fetchUserProfil(token, dispatch);
 
@@ -55,6 +54,7 @@ const UserModal = ({ isOpen, closeModal, children }) => {
               disabled
             />
           </div>
+          <div id="errorMessage"></div>
           <div className="container-usermodal-button">
             <button className="close-usermodal-button" onClick={handleSubmit}>
               Save

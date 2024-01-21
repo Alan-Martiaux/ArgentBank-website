@@ -10,6 +10,7 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
       password: password,
     })
     .then(function (response) {
+      document.getElementById("errorLoginMessage").innerHTML = "";
       if (response && response.status === 200) {
         const responseData = response.data;
         console.log(response);
@@ -26,8 +27,8 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
 
     .catch(function (error) {
       console.log(error);
-
-      alert("Veuillez verifier vos identifiant de connexion !");
+      document.getElementById("errorLoginMessage").innerHTML =
+        " Veuillez vérifier vos informations de connexion et réessayer.";
     });
 };
 
@@ -53,30 +54,36 @@ export const fetchUserProfil = (token, dispatch) => {
     });
 };
 
-export const fetchUpdateUserName = (token, SetUsername, dispatch) => {
+export const fetchUpdateUserName = (
+  token,
+  SetUsername,
+  dispatch,
+  closeModal
+) => {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
 
   console.log(headers, token);
+  if (SetUsername.trim() !== "") {
+    document.getElementById("errorMessage").innerHTML = "";
+    // Lance uniquement si le username est défini
+    axios
+      .put(URL + "profile", { userName: SetUsername }, { headers })
+      .then(function (response) {
+        console.log(response);
 
-  axios
-    .put(URL + "profile", { userName: SetUsername }, { headers })
-    .then(function (response) {
-      console.log(response);
-
-      console.log(SetUsername);
-
-      // Dispatch seulement si le nom d'utilisateur est disponible
-      if (SetUsername) {
-        dispatch(setUsername(SetUsername));
         console.log(SetUsername);
-      } else {
-        console.error("Veuillez entrer un nom d'utilisateur valide !");
-      }
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+        dispatch(setUsername(SetUsername));
+        closeModal(); // Fermer la modal Bootstrap après la mise à jour réussie
+      })
+      .catch(function (error) {
+        console.error(error);
+        // Vous pouvez afficher un message d'erreur dans la modal si nécessaire
+      });
+  } else {
+    document.getElementById("errorMessage").innerHTML =
+      "Veuillez entrer un nom d'utilisateur valide !";
+  }
 };
