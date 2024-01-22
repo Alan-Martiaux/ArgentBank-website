@@ -1,5 +1,5 @@
 import Banner from "../../components/banner/banner";
-import ArrayFeatures from "../../components/features/featuresItem.json";
+import ArrayFeatures from "../../data/featuresItem.json";
 import Features from "../../components/features/feature";
 import "../../css/main.css";
 
@@ -8,6 +8,7 @@ function HomePage() {
     <main>
       <Banner />
       <section className="features">
+        <h2 className="sr-only">Features</h2>
         {ArrayFeatures.map((features, index) => (
           <Features
             key={index}

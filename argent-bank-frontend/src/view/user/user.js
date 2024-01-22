@@ -1,8 +1,6 @@
-// import PropTypes from "prop-types";
 import "../../css/main.css";
 import Arraytransaction from "../../data/transaction.json";
 import Transaction from "../../components/transaction/transaction";
-//import { Owner } from "../../components/username/username";
 import { useState } from "react";
 import UserModal from "../../components/modal/UserModal";
 import { useSelector } from "react-redux";
@@ -21,7 +19,6 @@ function User() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  //console.log(userName);
 
   if (!token) {
     return <Navigate to="/" />;

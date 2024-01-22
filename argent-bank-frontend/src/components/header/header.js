@@ -1,5 +1,5 @@
 import "../../css/main.css";
-import Logo from "../../image/argentBankLogo.png";
+import Logo from "../../image/argentBankLogo.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
