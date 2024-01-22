@@ -131,7 +131,7 @@ body {
 #errorMessage {
   padding: 10px 0px;
   color: #00bc77;
-  text-decoration: underline;
+  font-weight: 700;
 }
 @media (min-width: 920px) {
   .features {

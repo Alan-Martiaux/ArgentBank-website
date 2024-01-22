@@ -28,7 +28,7 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
     .catch(function (error) {
       console.log(error);
       document.getElementById("errorLoginMessage").innerHTML =
-        " Veuillez vérifier vos informations de connexion et réessayer.";
+        "Please check your login information and try again";
     });
 };
 
@@ -84,6 +84,6 @@ export const fetchUpdateUserName = (
       });
   } else {
     document.getElementById("errorMessage").innerHTML =
-      "Veuillez entrer un nom d'utilisateur valide !";
+      "Please enter a valid username !";
   }
 };
