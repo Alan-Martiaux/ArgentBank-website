@@ -20,7 +20,7 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
 
         if (token) {
           console.log("WIN");
-          navigate("/user");
+          navigate("/profile");
         }
       }
     })
