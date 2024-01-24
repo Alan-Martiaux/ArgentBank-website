@@ -133,8 +133,8 @@ body {
 #errorLoginMessage,
 #errorMessage {
   padding: 10px 0px;
-  color: #00bc77;
-  font-weight: 700;
+  color: red;
+  font-weight: 600;
 }
 @media (min-width: 920px) {
   .features {

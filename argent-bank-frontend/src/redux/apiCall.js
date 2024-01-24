@@ -13,20 +13,17 @@ export const fetchUserData = (email, password, navigate, dispatch) => {
       document.getElementById("errorLoginMessage").innerHTML = "";
       if (response && response.status === 200) {
         const responseData = response.data;
-        console.log(response);
         const token = responseData.body.token;
-        console.log(responseData.message);
         dispatch(setToken(token));
 
         if (token) {
-          console.log("WIN");
           navigate("/profile");
         }
       }
     })
 
     .catch(function (error) {
-      console.log(error);
+      console.error(error);
       document.getElementById("errorLoginMessage").innerHTML =
         "Please check your login information and try again";
     });
@@ -50,7 +47,6 @@ export const fetchUserProfil = (token, dispatch) => {
 
     .catch(function (error) {
       console.error(error);
-      console.log(error.response);
     });
 };
 
@@ -65,16 +61,12 @@ export const fetchUpdateUserName = (
     Authorization: `Bearer ${token}`,
   };
 
-  console.log(headers, token);
   if (SetUsername.trim() !== "") {
     document.getElementById("errorMessage").innerHTML = "";
     // Lance uniquement si le username est défini
     axios
       .put(URL + "profile", { userName: SetUsername }, { headers })
       .then(function (response) {
-        console.log(response);
-
-        console.log(SetUsername);
         dispatch(setUsername(SetUsername));
         closeModal(); // Fermer la modal après la mise à jour réussie
       })

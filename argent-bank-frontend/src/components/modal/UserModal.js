@@ -15,7 +15,6 @@ const UserModal = ({ isOpen, closeModal, children }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const SetUsername = document.querySelector(".inputNewUserName");
-    console.error(SetUsername.value);
     fetchUpdateUserName(token, SetUsername.value, dispatch, closeModal);
   };
   fetchUserProfil(token, dispatch);

@@ -15,7 +15,6 @@ function Header() {
   const token = useSelector((state) => state.user.token);
 
   const handlelogout = () => {
-    console.log(token);
     dispatch(logout());
   };
   return (

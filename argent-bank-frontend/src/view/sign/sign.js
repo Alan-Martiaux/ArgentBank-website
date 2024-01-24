@@ -11,14 +11,12 @@ function SignIn() {
 
   const handleSignIn = () => {
     try {
-      console.log("try");
       fetchUserData(username, password, navigate, dispatch);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const handleSend = (e) => {
-    console.log("handleSend");
     e.preventDefault();
     handleSignIn();
   };
