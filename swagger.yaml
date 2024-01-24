@@ -101,8 +101,37 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User Account API
+      description: API for retrieving all user account
+      parameters:
+        - in: header
+          name: token
+          description: Bearer Token
+          required: true
+          type: string
 
-  /user/{Account_ID}/transaction:
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: The transactions have been successfully retrieved.
+          schema:
+            type: array
+            items: { $ref: "#/definitions/UserAccount" }
+        "400":
+          description: Invalid Fields
+        "401":
+          description: UnAuthorized
+        "500":
+          description: Internal Server Error
+
+  /user/{account_id}/transactions:
     get:
       security:
         - Bearer: []
@@ -117,10 +146,16 @@ paths:
           required: true
           type: string
         - in: path
-          name: Account_ID
+          name: account_id
           description: ID of the Account
           required: true
           type: string
+        - in: query
+          name: month
+          description: Filter transactions for a specific month (2024-01)
+          required: true
+          type: string
+
       produces:
         - application/json
       responses:
@@ -133,10 +168,12 @@ paths:
           description: Invalid Fields
         "401":
           description: UnAuthorized
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
 
-  /user/{Account_ID}/transaction/{Transaction_ID}:
+  /user/{account_id}/transactions/{transaction_id}:
     get:
       security:
         - Bearer: []
@@ -146,12 +183,12 @@ paths:
       description: API for retrieving a user transaction
       parameters:
         - in: path
-          name: Account_ID
+          name: account_id
           description: ID Account
           required: true
           type: string
         - in: path
-          name: Transaction_ID
+          name: transaction_id
           description: ID of the transaction to be updated
           required: true
           type: string
@@ -166,6 +203,8 @@ paths:
           description: Invalid Fields
         "401":
           description: UnAuthorized
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
     put:
@@ -177,12 +216,12 @@ paths:
       description: API for updating a transaction
       parameters:
         - in: path
-          name: Account_ID
+          name: account_id
           description: ID of the user account
           required: true
           type: string
         - in: path
-          name: Transaction_ID
+          name: transaction_id
           description: ID of the transaction to update
           required: true
           type: string
@@ -206,6 +245,8 @@ paths:
             $ref: "#/definitions/UpdateTransaction"
         "400":
           description: Invalid Fields
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
 
@@ -266,31 +307,49 @@ definitions:
       userName:
         type: string
 
+  UserAccount:
+    type: object
+    properties:
+      account_id:
+        type: string
+      balance:
+        type: number
+        format: float
+    required:
+      - account_id
+      - balance
+    example:
+      account_id: "123456"
+      balance: 1000.50
+
   UserTransaction:
     type: object
     properties:
-      Transaction_ID:
+      transaction_id:
         type: string
-      Date:
+      date:
         type: string
         format: date
-      Description:
+      description:
         type: object
         properties:
-          Transaction Type:
+          transaction_type:
             type: string
-          Category:
+          category:
             type: string
-          Note:
+          note:
             type: string
-      Amount:
-        type: integer
-      Balance:
-        type: integer
+      amount:
+        type: number
+        format: float
+      balance:
+        type: number
+        format: float
+
   UpdateTransaction:
     type: object
     properties:
-      Transaction Type:
+      transaction_type:
         type: string
       category:
         type: string
