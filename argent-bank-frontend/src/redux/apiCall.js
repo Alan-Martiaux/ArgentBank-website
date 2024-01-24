@@ -76,7 +76,7 @@ export const fetchUpdateUserName = (
 
         console.log(SetUsername);
         dispatch(setUsername(SetUsername));
-        closeModal(); // Fermer la modal Bootstrap après la mise à jour réussie
+        closeModal(); // Fermer la modal après la mise à jour réussie
       })
       .catch(function (error) {
         console.error(error);
